@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnicomTicManagementSystem.Models;
-using UnicomTicManagementSystem.Repositories;
+using UnicomTICManagementSystem.Repositories;
 
 
 namespace UnicomTICManagementSystem.Controllers

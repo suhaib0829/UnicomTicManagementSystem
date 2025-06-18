@@ -1,138 +1,141 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// In Views/MainForm.cs
+
+using System;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Models;
-using UnicomTicManagementSystem.Controllers;
-using UnicomTicManagementSystem.Views;
 using UnicomTICManagementSystem.Views;
+
 
 namespace UnicomTicManagementSystem.Views
 {
-    // A private field to store the user who logged in
-    //private readonly User _currentUser;
+    // The 'partial class' means this file and the Designer.cs file combine to make one class.
     public partial class MainForm : Form
     {
-        private string _loggedInUserRole = "";
+        // Private fields to store information about the logged-in user
         private readonly object _loggedInPrincipal;
+        private string _loggedInUserRole = "";
 
-        // THIS IS THE CONSTRUCTOR that fixes our error.
-        // It accepts one argument, which we name 'principal'.
+        // The constructor that receives the logged-in user object from the LoginForm
         public MainForm(object principal)
         {
+            // This special method (from the Designer.cs file) creates and draws all the controls.
             InitializeComponent();
 
-            // We take the passed-in object and store it in our private field.
             _loggedInPrincipal = principal;
         }
-        private readonly User _currentUser;
-        public MainForm(User user)
-        {
-            InitializeComponent();
-            _currentUser = user;
-            this.Text = $"Course Management - Logged in as: {_currentUser.Username}";
 
+        // This method runs automatically just before the form is shown
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            SetupDashboardForRole();
         }
-        // Inside the MainForm class
+
+        // This method checks the user's role and shows/hides the correct buttons
         private void SetupDashboardForRole()
         {
-            // Start by hiding all management buttons. This is a "secure by default" approach.
-            manageCoursesButton.Visible = false;
-            manageStudentsButton.Visible = false;
-            manageExamsButton.Visible = false;
-            manageTimetableButton.Visible = false;
-            viewTimetableButton.Visible = false;
-            viewMarksButton.Visible = false;
+            // First, hide all buttons that are role-dependent.
+            // We will make them visible again based on the role.
+            btnManageCourses.Visible = false;
+            btnManageStudents.Visible = false;
+            btnManageExams.Visible = false;
+            btnManageTimetable.Visible = false; // Start with everything hidden
 
-            // Use a switch statement to show buttons based on the user's role.
-            switch (_currentUser.Role)
-            {
-                case "Admin":
-                    // Admin sees all management buttons.
-                    manageCoursesButton.Visible = true;
-                    manageStudentsButton.Visible = true;
-                    manageExamsButton.Visible = true;
-                    manageTimetableButton.Visible = true;
-                    break;
-
-                case "Staff":
-                    // Staff can view timetables and manage exams/marks.
-                    viewTimetableButton.Visible = true;
-                    manageExamsButton.Visible = true; // As per spec: "add/edit exams and marks"
-                    break;
-
-                case "Student":
-                    // Student can view their timetable and marks.
-                    viewTimetableButton.Visible = true;
-                    viewMarksButton.Visible = true;
-                    break;
-
-                case "Lecturer":
-                    // Lecturer can view timetables and add/edit marks.
-                    viewTimetableButton.Visible = true;
-                    manageExamsButton.Visible = true; // We'll give them access to the same form as staff
-                    break;
-            }
-        }
-        private void MainForm_Load(object sender, System.EventArgs e)
-        {
             string role = "";
+            string username = "";
+
+            // Determine the role and username from the principal object
             if (_loggedInPrincipal is User user)
             {
                 role = user.Role;
+                username = user.Username;
             }
-            else if (_loggedInPrincipal is Student)
+            else if (_loggedInPrincipal is Student student)
             {
                 role = "Student";
+                username = student.Username;
             }
-            _loggedInUserRole = role;
+
+            _loggedInUserRole = role; // Store the role for use by other buttons
+
+            // Update the title label on our fancy title bar
+            lblTitle.Text = $"Welcome, {username} ({_loggedInUserRole})";
+
+            // Use a switch statement to control button visibility
+            switch (_loggedInUserRole)
+            {
+                case "Admin":
+                    btnManageCourses.Visible = true;
+                    btnManageStudents.Visible = true;
+                    btnManageExams.Visible = true;
+                    btnManageTimetable.Visible = true;
+                    break;
+
+                case "Staff":
+                    btnManageExams.Visible = true;
+                    btnManageTimetable.Visible = true;
+                    break;
+
+                case "Lecturer":
+                    btnManageExams.Visible = true;
+                    btnManageTimetable.Visible = true;
+
+                    // Let's refine the text for the lecturer
+                    btnManageExams.Text = "Enter/Edit Marks";
+                    btnManageTimetable.Text = "View Timetable";
+                    break;
+
+                case "Student":
+                    btnManageExams.Visible = true;
+                    btnManageTimetable.Visible = true;
+
+                    // Refine the text for the student
+                    btnManageExams.Text = "View My Marks";
+                    btnManageTimetable.Text = "View My Timetable";
+                    break;
+            }
         }
 
-        private void ManageCoursesButton_Click(object sender, EventArgs e)
-        {
-            CourseForm courseForm = new CourseForm();
-            // Show it to the user.
-            courseForm.ShowDialog();
-        }
-
-        private void ManageStudentsButton_Click(object sender, EventArgs e)
-        {
-            var studentForm = new StudentForm(_currentUser);
-            studentForm.Show();
-        }
-
-        private void ManageExamsButton_Click(object sender, EventArgs e)
-        {
-            var examForm = new ExamForm(_currentUser);
-            examForm.Show();
-        }
-
-        private void ManageTimetableButton_Click(object sender, EventArgs e)
-        {
-            var timetableForm = new TimetableForm(_currentUser);
-            timetableForm.Show();
-        }
-
-        private void ViewTimetableButton_Click(object sender, EventArgs e)
-        {
-            var timetableForm = new TimetableForm(_currentUser);
-            timetableForm.Show();
-        }
-
-        private void ViewMarksButton_Click(object sender, EventArgs e)
-        {
-            var markForm = new MarkForm(_currentUser);
-            markForm.Show();
-        }
-
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        // This ensures the entire application closes when this form is closed.
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        // --- All the Button Click Handlers ---
+        // These methods define what happens when a button is clicked.
+
+        private void btnManageCourses_Click(object sender, EventArgs e)
+        {
+            using (var courseForm = new CourseForm())
+            {
+                courseForm.ShowDialog(this); // 'this' makes it open centered over the MainForm
+            }
+        }
+
+        private void btnManageStudents_Click(object sender, EventArgs e)
+        {
+            using (var studentForm = new StudentForm())
+            {
+                studentForm.ShowDialog(this);
+            }
+        }
+
+        private void btnManageExams_Click(object sender, EventArgs e)
+        {
+            // We open the MarksForm and pass the entire logged-in user object to it.
+            using (var marksForm = new MarksForm(_loggedInPrincipal))
+            {
+                marksForm.ShowDialog(this);
+            }
+        }
+
+        private void btnManageTimetable_Click(object sender, EventArgs e)
+        {
+            // We pass the user's role to the TimetableForm's constructor.
+            using (var timetableForm = new TimetableForm(_loggedInUserRole))
+            {
+                timetableForm.ShowDialog(this);
+            }
         }
     }
 }

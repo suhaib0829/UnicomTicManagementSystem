@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using UnicomTicManagementSystem.Controllers;
-using UnicomTicManagementSystem.Models;
-using UnicomTicManagementSystem.Views;
-using UnicomTICManagementSystem.Views;
-
+﻿// In Views/MainForm.Designer.cs
 
 namespace UnicomTicManagementSystem.Views
 {
@@ -43,153 +30,151 @@ namespace UnicomTicManagementSystem.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.manageCoursesButton = new System.Windows.Forms.Button();
-            this.manageStudentsButton = new System.Windows.Forms.Button();
-            this.manageExamsButton = new System.Windows.Forms.Button();
-            this.manageTimetableButton = new System.Windows.Forms.Button();
-            this.viewTimetableButton = new System.Windows.Forms.Button();
-            this.viewMarksButton = new System.Windows.Forms.Button();
+            this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.panelButtons = new System.Windows.Forms.Panel();
+            this.btnManageCourses = new System.Windows.Forms.Button();
+            this.btnManageStudents = new System.Windows.Forms.Button();
+            this.btnManageExams = new System.Windows.Forms.Button();
+            this.btnManageTimetable = new System.Windows.Forms.Button();
+            this.panelTitleBar.SuspendLayout();
+            this.panelButtons.SuspendLayout();
             this.SuspendLayout();
             // 
-            // manageCoursesButton
+            // panelTitleBar
             // 
-            this.manageCoursesButton.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.manageCoursesButton.Location = new System.Drawing.Point(25, 100);
-            this.manageCoursesButton.Name = "manageCoursesButton";
-            this.manageCoursesButton.Size = new System.Drawing.Size(216, 93);
-            this.manageCoursesButton.TabIndex = 0;
-            this.manageCoursesButton.Text = "Manage Courses & Subjects";
-            this.manageCoursesButton.UseVisualStyleBackColor = false;
-            this.manageCoursesButton.Click += new System.EventHandler(this.manageCoursesButton_Click);
+            this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.panelTitleBar.Controls.Add(this.lblTitle);
+            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitleBar.Location = new System.Drawing.Point(0, 0);
+            this.panelTitleBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTitleBar.Name = "panelTitleBar";
+            this.panelTitleBar.Size = new System.Drawing.Size(800, 52);
+            this.panelTitleBar.TabIndex = 0;
             // 
-            // manageStudentsButton
+            // lblTitle
             // 
-            this.manageStudentsButton.BackColor = System.Drawing.SystemColors.Highlight;
-            this.manageStudentsButton.Location = new System.Drawing.Point(262, 100);
-            this.manageStudentsButton.Name = "manageStudentsButton";
-            this.manageStudentsButton.Size = new System.Drawing.Size(240, 93);
-            this.manageStudentsButton.TabIndex = 1;
-            this.manageStudentsButton.Text = "Manage Students";
-            this.manageStudentsButton.UseVisualStyleBackColor = false;
-            this.manageStudentsButton.Click += new System.EventHandler(this.manageStudentsButton_Click);
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
+            this.lblTitle.Size = new System.Drawing.Size(800, 52);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "UMS Dashboard";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // manageExamsButton
+            // panelButtons
             // 
-            this.manageExamsButton.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.manageExamsButton.Location = new System.Drawing.Point(522, 100);
-            this.manageExamsButton.Name = "manageExamsButton";
-            this.manageExamsButton.Size = new System.Drawing.Size(220, 93);
-            this.manageExamsButton.TabIndex = 2;
-            this.manageExamsButton.Text = "Manage Exams & Marks";
-            this.manageExamsButton.UseVisualStyleBackColor = false;
-            this.manageExamsButton.Click += new System.EventHandler(this.manageExamsButton_Click);
+            this.panelButtons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
+            this.panelButtons.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelButtons.Controls.Add(this.btnManageCourses);
+            this.panelButtons.Controls.Add(this.btnManageStudents);
+            this.panelButtons.Controls.Add(this.btnManageExams);
+            this.panelButtons.Controls.Add(this.btnManageTimetable);
+            this.panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelButtons.Location = new System.Drawing.Point(0, 52);
+            this.panelButtons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelButtons.Name = "panelButtons";
+            this.panelButtons.Padding = new System.Windows.Forms.Padding(33, 32, 33, 32);
+            this.panelButtons.Size = new System.Drawing.Size(800, 416);
+            this.panelButtons.TabIndex = 1;
             // 
-            // manageTimetableButton
+            // btnManageCourses
             // 
-            this.manageTimetableButton.BackColor = System.Drawing.Color.LightPink;
-            this.manageTimetableButton.Location = new System.Drawing.Point(25, 262);
-            this.manageTimetableButton.Name = "manageTimetableButton";
-            this.manageTimetableButton.Size = new System.Drawing.Size(216, 92);
-            this.manageTimetableButton.TabIndex = 3;
-            this.manageTimetableButton.Text = "Manage Timetable";
-            this.manageTimetableButton.UseVisualStyleBackColor = false;
-            this.manageTimetableButton.Click += new System.EventHandler(this.manageTimetableButton_Click);
+            this.btnManageCourses.BackColor = System.Drawing.Color.White;
+            this.btnManageCourses.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnManageCourses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManageCourses.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManageCourses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnManageCourses.Location = new System.Drawing.Point(33, 32);
+            this.btnManageCourses.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnManageCourses.Name = "btnManageCourses";
+            this.btnManageCourses.Size = new System.Drawing.Size(187, 78);
+            this.btnManageCourses.TabIndex = 0;
+            this.btnManageCourses.Text = "Manage Courses\r\n&& Subjects";
+            this.btnManageCourses.UseVisualStyleBackColor = false;
+            this.btnManageCourses.Click += new System.EventHandler(this.btnManageCourses_Click);
             // 
-            // viewTimetableButton
+            // btnManageStudents
             // 
-            this.viewTimetableButton.BackColor = System.Drawing.Color.Pink;
-            this.viewTimetableButton.Location = new System.Drawing.Point(262, 262);
-            this.viewTimetableButton.Name = "viewTimetableButton";
-            this.viewTimetableButton.Size = new System.Drawing.Size(240, 92);
-            this.viewTimetableButton.TabIndex = 4;
-            this.viewTimetableButton.Text = "View Timetable";
-            this.viewTimetableButton.UseVisualStyleBackColor = false;
-            this.viewTimetableButton.Click += new System.EventHandler(this.viewTimetableButton_Click);
+            this.btnManageStudents.BackColor = System.Drawing.Color.White;
+            this.btnManageStudents.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnManageStudents.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManageStudents.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManageStudents.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnManageStudents.Location = new System.Drawing.Point(233, 32);
+            this.btnManageStudents.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnManageStudents.Name = "btnManageStudents";
+            this.btnManageStudents.Size = new System.Drawing.Size(187, 78);
+            this.btnManageStudents.TabIndex = 1;
+            this.btnManageStudents.Text = "Manage Students";
+            this.btnManageStudents.UseVisualStyleBackColor = false;
+            this.btnManageStudents.Click += new System.EventHandler(this.btnManageStudents_Click);
             // 
-            // viewMarksButton
+            // btnManageExams
             // 
-            this.viewMarksButton.BackColor = System.Drawing.Color.PaleVioletRed;
-            this.viewMarksButton.Location = new System.Drawing.Point(522, 262);
-            this.viewMarksButton.Name = "viewMarksButton";
-            this.viewMarksButton.Size = new System.Drawing.Size(220, 92);
-            this.viewMarksButton.TabIndex = 5;
-            this.viewMarksButton.Text = "View My Marks";
-            this.viewMarksButton.UseVisualStyleBackColor = false;
-            this.viewMarksButton.Click += new System.EventHandler(this.viewMarksButton_Click);
+            this.btnManageExams.BackColor = System.Drawing.Color.White;
+            this.btnManageExams.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnManageExams.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManageExams.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManageExams.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnManageExams.Location = new System.Drawing.Point(33, 123);
+            this.btnManageExams.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnManageExams.Name = "btnManageExams";
+            this.btnManageExams.Size = new System.Drawing.Size(187, 78);
+            this.btnManageExams.TabIndex = 2;
+            this.btnManageExams.Text = "Manage Exams\r\n&& Marks";
+            this.btnManageExams.UseVisualStyleBackColor = false;
+            this.btnManageExams.Click += new System.EventHandler(this.btnManageExams_Click);
+            // 
+            // btnManageTimetable
+            // 
+            this.btnManageTimetable.BackColor = System.Drawing.Color.White;
+            this.btnManageTimetable.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnManageTimetable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnManageTimetable.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManageTimetable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnManageTimetable.Location = new System.Drawing.Point(233, 123);
+            this.btnManageTimetable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnManageTimetable.Name = "btnManageTimetable";
+            this.btnManageTimetable.Size = new System.Drawing.Size(187, 78);
+            this.btnManageTimetable.TabIndex = 3;
+            this.btnManageTimetable.Text = "Manage Timetable";
+            this.btnManageTimetable.UseVisualStyleBackColor = false;
+            this.btnManageTimetable.Click += new System.EventHandler(this.btnManageTimetable_Click);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.viewMarksButton);
-            this.Controls.Add(this.viewTimetableButton);
-            this.Controls.Add(this.manageTimetableButton);
-            this.Controls.Add(this.manageExamsButton);
-            this.Controls.Add(this.manageStudentsButton);
-            this.Controls.Add(this.manageCoursesButton);
-            this.ForeColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(800, 468);
+            this.Controls.Add(this.panelButtons);
+            this.Controls.Add(this.panelTitleBar);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainForm";
-            this.Text = "MainForm";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Unicom TIC Management System";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.panelTitleBar.ResumeLayout(false);
+            this.panelButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
-        private void viewMarksButton_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void viewTimetableButton_Click(object sender, EventArgs e)
-        {
-            // We pass the user's role to the form's constructor.
-            TimetableForm timetableForm = new TimetableForm(_loggedInUserRole);
-            timetableForm.ShowDialog();
-            throw new NotImplementedException();
-        }
-
-        private void manageTimetableButton_Click(object sender, EventArgs e)
-        {
-            // We pass the user's role to the form's constructor.
-            TimetableForm timetableForm = new TimetableForm(_loggedInUserRole);
-            timetableForm.ShowDialog();
-            throw new NotImplementedException();
-        }
-
-        private void manageExamsButton_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void manageStudentsButton_Click(object sender, EventArgs e)
-        {
-            // Create an instance of our new form
-            StudentForm studentForm = new StudentForm();
-            // Show it as a modal dialog
-            studentForm.ShowDialog();
-            throw new NotImplementedException();
-        }
-
-        private void manageCoursesButton_Click(object sender, EventArgs e)
-        {
-            CourseForm courseForm = new CourseForm();
-
-            // Show it as a dialog. This will pause the code here until the form is closed.
-            
-            {
-                courseForm.ShowDialog();
-            }
-        }
-
         #endregion
 
-        private System.Windows.Forms.Button manageCoursesButton;
-        private System.Windows.Forms.Button manageStudentsButton;
-        private System.Windows.Forms.Button manageExamsButton;
-        private System.Windows.Forms.Button manageTimetableButton;
-        private System.Windows.Forms.Button viewTimetableButton;
-        private System.Windows.Forms.Button viewMarksButton;
+        // --- 7. Declare Control Variables ---
+        private System.Windows.Forms.Panel panelTitleBar;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Panel panelButtons;
+        private System.Windows.Forms.Button btnManageCourses;
+        private System.Windows.Forms.Button btnManageStudents;
+        private System.Windows.Forms.Button btnManageExams;
+        private System.Windows.Forms.Button btnManageTimetable;
     }
 }

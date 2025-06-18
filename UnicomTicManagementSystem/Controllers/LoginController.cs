@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnicomTicManagementSystem.Models;
-using UnicomTicManagementSystem.Repositories;
+
+using UnicomTICManagementSystem.Repositories;
 
 namespace UnicomTicManagementSystem.Controllers
 {
@@ -29,6 +29,20 @@ namespace UnicomTicManagementSystem.Controllers
 
             // If neither was found, return null to indicate failure
             return null;
+        }
+
+        internal async Task<object> AuthenticateAsync(object value, object text)
+        {
+            // Simulate asynchronous operation using Task.Run
+            return await Task.Run(() =>
+            {
+                // Placeholder logic for authentication
+                if (value != null && text != null)
+                {
+                    return new { Value = value, Text = text }; // Example return object
+                }
+                return null;
+            });
         }
     }
     

@@ -3,13 +3,32 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnicomTicManagementSystem.Models;
-using UnicomTicManagementSystem.Repositories;
+using UnicomTICManagementSystem.Repositories;
 
 
-namespace UnicomTICManagementSystem.Controllers
+namespace UnicomTicManagementSystem.Controllers
 {
     public class CourseController
     {
+        public Task<List<Subject>> GetSubjectsForCourseAsync(int courseId)
+        {
+            // Simple pass-through
+            return DatabaseManager.Instance.GetSubjectsForCourseAsync(courseId);
+        }
+
+        public Task AddSubjectAsync(string subjectName, int courseId)
+        {
+            // Add validation
+            if (string.IsNullOrWhiteSpace(subjectName))
+            {
+                throw new ArgumentException("Subject name cannot be empty.");
+            }
+            if (courseId <= 0)
+            {
+                throw new ArgumentException("A course must be selected before adding a subject.");
+            }
+            return DatabaseManager.Instance.AddSubjectAsync(subjectName, courseId);
+        }
         // This method simply passes the request along to the database manager.
         public Task<List<Course>> GetAllCoursesAsync()
         {

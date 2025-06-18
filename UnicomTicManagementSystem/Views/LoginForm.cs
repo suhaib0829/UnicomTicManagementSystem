@@ -1,79 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// In Views/LoginForm.cs
+
+using System;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Controllers;
-using UnicomTicManagementSystem.Models;
-using UnicomTicManagementSystem.Views;
 
-namespace UnicomTicManagementSystem
+namespace UnicomTicManagementSystem.Views
 {
+    // This correctly inherits from Form.
     public partial class LoginForm : Form
     {
-        private async void LoginButton_Click(object sender, EventArgs e)
-        {
-            // 1. Get the input from the text boxes.
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
+        // NOTE: We have removed the incorrect declarations of txtUsername and txtPassword.
+        // The real controls are defined in the Designer.cs file.
 
-            // Basic validation: make sure fields are not empty.
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-            {
-                MessageBox.Show("Please enter both username and password.", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; // Stop the method here
-            }
-
-            try
-            {
-                // 2. Create an instance of our controller.
-                LoginController loginController = new LoginController();
-
-                // 3. Use the controller to attempt the login.
-                var loggedInPrincipal = await loginController.AuthenticateAsync(username, password);
-
-                // 4. Check the result.
-                if (loggedInPrincipal is User user) // Ensure the object is of type 'User'
-                {
-                    // Login was successful!
-                    _ = MessageBox.Show(text: $"Welcome, {user.UserName}!", "Login Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Create the main form, passing the logged-in user's information.
-                    var mainForm = new MainForm(user);
-                    mainForm.Show(); // Show the new form.
-
-                    this.Hide(); // Hide the login form.
-                }
-                else
-                {
-                    // Login failed.
-                    MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions that may occur during the login process.
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
+        // This is the constructor. It calls the method that draws the controls.
         public LoginForm()
         {
             InitializeComponent();
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
+        // This is the logic for the login button click event.
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
+            // Now, this code will correctly find the 'Text' property because
+            // it's referring to the real TextBox controls.
+            if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Please enter both username and password.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                var loginController = new LoginController();
+                object principal = await loginController.AuthenticateAsync(txtUsername.Text.Trim(), txtPassword.Text);
 
-        }
-
-        private void usernameTextBox_TextChanged(object sender, EventArgs e)
-        {
-
+                if (principal != null)
+                {
+                    // If login is successful, create the MainForm
+                    var mainForm = new MainForm(principal);
+                    mainForm.Show();
+                    this.Hide(); // Hide the login form
+                }
+                else
+                {
+                    MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"A system error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
         }
     }
 }
