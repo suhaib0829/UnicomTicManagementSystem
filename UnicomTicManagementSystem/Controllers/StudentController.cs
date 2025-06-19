@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnicomTicManagementSystem.Models;
-using UnicomTICManagementSystem.Repositories;
+using UnicomTicManagementSystem.Repositories;
 
 
-namespace UnicomTICManagementSystem.Controllers
+namespace UnicomTicManagementSystem.Controllers
 {
     public class StudentController
     {

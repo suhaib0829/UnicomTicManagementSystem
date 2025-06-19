@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using UnicomTicManagementSystem.Models;
 
 
-namespace UnicomTICManagementSystem.Repositories
+namespace UnicomTicManagementSystem.Repositories
 {
     /// <summary>
     /// Manages all interactions with the SQLite database.

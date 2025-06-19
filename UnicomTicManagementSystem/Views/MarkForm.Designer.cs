@@ -1,10 +1,18 @@
 ﻿// In Views/MarksForm.Designer.cs
-namespace UnicomTICManagementSystem.Views
+namespace UnicomTicManagementSystem.Views
 {
-    partial class MarksForm
+    // It is public and partial.
+    public partial class MarksForm
     {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -16,6 +24,10 @@ namespace UnicomTICManagementSystem.Views
 
         #region Windows Form Designer generated code
 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
@@ -25,12 +37,14 @@ namespace UnicomTICManagementSystem.Views
             ((System.ComponentModel.ISupportInitialize)(this.dgvMarks)).BeginInit();
             this.SuspendLayout();
 
+            // label1
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Text = "Select Exam:";
 
+            // cmbExams
             this.cmbExams.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbExams.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cmbExams.FormattingEnabled = true;
@@ -39,6 +53,7 @@ namespace UnicomTICManagementSystem.Views
             this.cmbExams.Size = new System.Drawing.Size(400, 36);
             this.cmbExams.SelectedIndexChanged += new System.EventHandler(this.cmbExams_SelectedIndexChanged);
 
+            // btnSaveChanges
             this.btnSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveChanges.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btnSaveChanges.FlatAppearance.BorderSize = 0;
@@ -52,6 +67,7 @@ namespace UnicomTICManagementSystem.Views
             this.btnSaveChanges.UseVisualStyleBackColor = false;
             this.btnSaveChanges.Click += new System.EventHandler(this.btnSaveChanges_Click);
 
+            // dgvMarks
             this.dgvMarks.AllowUserToAddRows = false;
             this.dgvMarks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)
@@ -63,6 +79,7 @@ namespace UnicomTICManagementSystem.Views
             this.dgvMarks.RowTemplate.Height = 28;
             this.dgvMarks.Size = new System.Drawing.Size(938, 500);
 
+            // MarksForm
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
@@ -82,6 +99,7 @@ namespace UnicomTICManagementSystem.Views
 
         #endregion
 
+        // These declarations belong here. They define the controls for the form.
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbExams;
         private System.Windows.Forms.DataGridView dgvMarks;

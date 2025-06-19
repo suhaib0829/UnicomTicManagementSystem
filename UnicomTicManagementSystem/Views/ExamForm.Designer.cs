@@ -56,7 +56,7 @@ namespace UnicomTicManagementSystem.Views
             this.dgvExams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvExams.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvExams.Location = new System.Drawing.Point(0, 0);
-            this.dgvExams.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvExams.Margin = new System.Windows.Forms.Padding(2);
             this.dgvExams.Name = "dgvExams";
             this.dgvExams.ReadOnly = true;
             this.dgvExams.RowTemplate.Height = 28;
@@ -79,9 +79,9 @@ namespace UnicomTicManagementSystem.Views
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 162);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(519, 192);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
@@ -90,7 +90,7 @@ namespace UnicomTicManagementSystem.Views
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(357, 117);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(100, 26);
             this.btnClear.TabIndex = 0;
@@ -101,7 +101,7 @@ namespace UnicomTicManagementSystem.Views
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(245, 117);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 26);
             this.btnDelete.TabIndex = 1;
@@ -112,7 +112,7 @@ namespace UnicomTicManagementSystem.Views
             // btnUpdate
             // 
             this.btnUpdate.Location = new System.Drawing.Point(133, 117);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(100, 26);
             this.btnUpdate.TabIndex = 2;
@@ -123,7 +123,7 @@ namespace UnicomTicManagementSystem.Views
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(21, 117);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(100, 26);
             this.btnAdd.TabIndex = 3;
@@ -136,7 +136,7 @@ namespace UnicomTicManagementSystem.Views
             this.cmbSubjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSubjects.FormattingEnabled = true;
             this.cmbSubjects.Location = new System.Drawing.Point(93, 76);
-            this.cmbSubjects.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbSubjects.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSubjects.Name = "cmbSubjects";
             this.cmbSubjects.Size = new System.Drawing.Size(201, 21);
             this.cmbSubjects.TabIndex = 4;
@@ -154,7 +154,7 @@ namespace UnicomTicManagementSystem.Views
             // txtExamName
             // 
             this.txtExamName.Location = new System.Drawing.Point(93, 50);
-            this.txtExamName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtExamName.Margin = new System.Windows.Forms.Padding(2);
             this.txtExamName.Name = "txtExamName";
             this.txtExamName.Size = new System.Drawing.Size(201, 20);
             this.txtExamName.TabIndex = 6;
@@ -173,7 +173,7 @@ namespace UnicomTicManagementSystem.Views
             // txtExamId
             // 
             this.txtExamId.Location = new System.Drawing.Point(93, 24);
-            this.txtExamId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtExamId.Margin = new System.Windows.Forms.Padding(2);
             this.txtExamId.Name = "txtExamId";
             this.txtExamId.ReadOnly = true;
             this.txtExamId.Size = new System.Drawing.Size(68, 20);
@@ -196,7 +196,7 @@ namespace UnicomTicManagementSystem.Views
             this.ClientSize = new System.Drawing.Size(519, 354);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvExams);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ExamForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Manage Exams";

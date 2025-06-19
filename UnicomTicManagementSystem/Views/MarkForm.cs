@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Controllers;
 using UnicomTicManagementSystem.Models;
+using UnicomTicManagementSystem.Services;
 
 
-namespace UnicomTICManagementSystem.Views
+namespace UnicomTicManagementSystem.Views
 {
+    // It is public and partial.
     public partial class MarksForm : Form
     {
+        // --- Fields for LOGIC ONLY ---
         private readonly ExamController _controller;
-        private readonly object _loggedInPrincipal;
         private bool _isProgrammaticallyChanging = false;
+        // NOTE: All the UI control declarations (like 'private DataGridView dgvMarks;') have been REMOVED from this file.
+        // They correctly live in the Designer.cs file.
 
-        public MarksForm(object principal)
+        // --- Constructor ---
+        public MarksForm()
         {
             InitializeComponent();
             _controller = new ExamController();
-            _loggedInPrincipal = principal;
         }
 
         #region Event Handlers
@@ -98,9 +102,7 @@ namespace UnicomTICManagementSystem.Views
         #region Helper Methods
         private void SetupFormForRole()
         {
-            string role = "";
-            if (_loggedInPrincipal is User) role = "Staff";
-            if (_loggedInPrincipal is Student) role = "Student";
+            string role = UserSession.Role;
 
             if (role == "Student")
             {
@@ -138,7 +140,7 @@ namespace UnicomTICManagementSystem.Views
                 _isProgrammaticallyChanging = true;
                 List<Mark> marks = await _controller.GetMarksForExamAsync(examId);
 
-                if (_loggedInPrincipal is Student student)
+                if (UserSession.Principal is Student student)
                 {
                     marks = marks.FindAll(m => m.StudentID == student.StudentID);
                 }
@@ -150,12 +152,10 @@ namespace UnicomTICManagementSystem.Views
                     dgvMarks.Columns["MarkID"].Visible = false;
                     dgvMarks.Columns["StudentID"].Visible = false;
                     dgvMarks.Columns["ExamID"].Visible = false;
-
                     dgvMarks.Columns["StudentName"].ReadOnly = true;
                     dgvMarks.Columns["ExamName"].ReadOnly = true;
                     dgvMarks.Columns["SubjectName"].ReadOnly = true;
-                    dgvMarks.Columns["Score"].ReadOnly = (_loggedInPrincipal is Student);
-
+                    dgvMarks.Columns["Score"].ReadOnly = (UserSession.Role == "Student");
                     dgvMarks.Columns["StudentName"].HeaderText = "Student Name";
                     dgvMarks.Columns["ExamName"].HeaderText = "Exam";
                     dgvMarks.Columns["SubjectName"].HeaderText = "Subject";

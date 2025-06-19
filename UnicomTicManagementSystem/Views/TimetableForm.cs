@@ -1,41 +1,35 @@
-﻿using System;
+﻿// In Views/TimetableForm.cs
+
+using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnicomTicManagementSystem.Controllers;
 using UnicomTicManagementSystem.Models;
-using UnicomTICManagementSystem.Controllers;
+using UnicomTicManagementSystem.Services;
 
 
-namespace UnicomTICManagementSystem.Views
+namespace UnicomTicManagementSystem.Views
 {
     public partial class TimetableForm : Form
     {
         private readonly TimetableController _controller;
-        // We need to know who is logged in to show/hide admin controls
-        private readonly string _userRole;
-        private User currentUser;
+        // NOTE: The _userRole field is removed. We'll get the role from UserSession.
 
-        // The constructor now accepts the user's role
-        public TimetableForm(string userRole)
+        // The constructor is now simple and takes no arguments.
+        public TimetableForm()
         {
             InitializeComponent();
             _controller = new TimetableController();
-            _userRole = userRole;
         }
 
-        public TimetableForm(User currentUser)
-        {
-            this.currentUser = currentUser;
-        }
-
-        // --- EVENT HANDLERS ---
-
+        #region Event Handlers
         private async void TimetableForm_Load(object sender, EventArgs e)
         {
             SetupFormForRole();
             await LoadTimetableAsync();
 
-            // Only load data for dropdowns if user is an Admin
-            if (_userRole == "Admin")
+            // Only load data for dropdowns if user is an Admin.
+            if (UserSession.Role == "Admin")
             {
                 await LoadSubjectsIntoComboBoxAsync();
                 await LoadRoomsIntoComboBoxAsync();
@@ -46,8 +40,8 @@ namespace UnicomTICManagementSystem.Views
 
         private void dgvTimetable_SelectionChanged(object sender, EventArgs e)
         {
-            // This code only matters for the Admin who can edit
-            if (_userRole != "Admin") return;
+            // This code only matters for the Admin who can edit.
+            if (UserSession.Role != "Admin") return;
 
             if (dgvTimetable.SelectedRows.Count > 0)
             {
@@ -113,7 +107,6 @@ namespace UnicomTICManagementSystem.Views
         private async void btnDelete_Click(object sender, EventArgs e)
         {
             var confirmResult = MessageBox.Show("Are you sure you want to delete this timetable entry?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
             if (confirmResult == DialogResult.Yes)
             {
                 try
@@ -135,17 +128,16 @@ namespace UnicomTICManagementSystem.Views
         {
             ClearForm();
         }
+        #endregion
 
-        // --- HELPER METHODS ---
-
-        // This method customizes the form based on the user's role
+        #region Helper Methods
         private void SetupFormForRole()
         {
-            if (_userRole != "Admin")
+            // Get the role directly from the global session.
+            if (UserSession.Role != "Admin")
             {
-                // If not an admin, hide all the editing controls
-                groupBox1.Visible = false; // The GroupBox containing all edit controls
-                // You can also change the form title
+                // If not an admin, hide the GroupBox containing all editing controls.
+                groupBox1.Visible = false;
                 this.Text = "View Timetable";
             }
         }
@@ -164,18 +156,17 @@ namespace UnicomTICManagementSystem.Views
         {
             try
             {
-                var entries = await _controller.GetAllTimetableEntriesAsync();
-                dgvTimetable.DataSource = entries;
+                dgvTimetable.DataSource = await _controller.GetAllTimetableEntriesAsync();
 
-                // Hide ID columns for a cleaner view
-                if (dgvTimetable.Columns["TimetableID"] != null) dgvTimetable.Columns["TimetableID"].Visible = false;
-                if (dgvTimetable.Columns["SubjectID"] != null) dgvTimetable.Columns["SubjectID"].Visible = false;
-                if (dgvTimetable.Columns["RoomID"] != null) dgvTimetable.Columns["RoomID"].Visible = false;
-
-                // Optionally, rename columns for better readability
-                if (dgvTimetable.Columns["SubjectName"] != null) dgvTimetable.Columns["SubjectName"].HeaderText = "Subject";
-                if (dgvTimetable.Columns["TimeSlot"] != null) dgvTimetable.Columns["TimeSlot"].HeaderText = "Time Slot";
-                if (dgvTimetable.Columns["RoomName"] != null) dgvTimetable.Columns["RoomName"].HeaderText = "Room / Hall";
+                if (dgvTimetable.Columns.Count > 0)
+                {
+                    dgvTimetable.Columns["TimetableID"].Visible = false;
+                    dgvTimetable.Columns["SubjectID"].Visible = false;
+                    dgvTimetable.Columns["RoomID"].Visible = false;
+                    dgvTimetable.Columns["SubjectName"].HeaderText = "Subject";
+                    dgvTimetable.Columns["TimeSlot"].HeaderText = "Time Slot";
+                    dgvTimetable.Columns["RoomName"].HeaderText = "Room / Hall";
+                }
             }
             catch (Exception ex)
             {
@@ -210,5 +201,6 @@ namespace UnicomTICManagementSystem.Views
                 MessageBox.Show($"Failed to load rooms: {ex.Message}", "Data Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
     }
 }

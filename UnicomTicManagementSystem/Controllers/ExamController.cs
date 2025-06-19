@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnicomTicManagementSystem.Models;
 // Add the missing namespace or assembly reference for 'Repositories'
 
-using UnicomTICManagementSystem.Repositories;
+using UnicomTicManagementSystem.Repositories;
 
 
 namespace UnicomTicManagementSystem.Controllers

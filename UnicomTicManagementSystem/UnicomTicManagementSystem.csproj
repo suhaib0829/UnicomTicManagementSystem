@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -155,6 +155,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TimetableController.cs" />
+    <Compile Include="Services\UserSession.cs" />
     <Compile Include="Views\CourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,7 +197,6 @@
     <Compile Include="Views\MarkForm.Designer.cs">
       <DependentUpon>MarkForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MarksForm.cs" />
     <Compile Include="Views\StudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,6 +253,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1699632566323.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\R.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\borderpng.parspng.com-14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1571749312226.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />

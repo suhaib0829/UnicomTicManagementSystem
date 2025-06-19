@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UnicomTicManagementSystem.Models;
-using UnicomTICManagementSystem.Controllers;
+using UnicomTicManagementSystem.Controllers;
 
 
 namespace UnicomTicManagementSystem.Views
