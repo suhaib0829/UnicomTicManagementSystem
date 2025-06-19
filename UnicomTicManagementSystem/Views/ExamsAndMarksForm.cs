@@ -49,6 +49,18 @@ namespace UnicomTicManagementSystem.Views
 
         private async void btnAddExam_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtExamName.Text))
+            {
+                MessageBox.Show("Please enter a name for the new exam.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtExamName.Focus();
+                return;
+            }
+
+            if (cmbSubjects.SelectedValue == null)
+            {
+                MessageBox.Show("Please select a subject for this exam.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             try
             {
                 await _controller.AddExamAsync(new Exam { ExamName = txtExamName.Text.Trim(), SubjectID = (int)cmbSubjects.SelectedValue });
@@ -104,7 +116,28 @@ namespace UnicomTicManagementSystem.Views
 
         private async void btnSaveChanges_Click(object sender, EventArgs e)
         {
-            // ... (Full btnSaveChanges_Click logic from MarksForm goes here) ...
+            foreach (DataGridViewRow row in dgvMarks.Rows)
+            {
+                var scoreCell = row.Cells["Score"];
+                if (scoreCell.Value != null && scoreCell.Value != DBNull.Value && !string.IsNullOrEmpty(scoreCell.Value.ToString()))
+                {
+                    // Check if the value is a valid integer.
+                    if (!int.TryParse(scoreCell.Value.ToString(), out int score))
+                    {
+                        MessageBox.Show($"The score '{scoreCell.Value}' for student '{row.Cells["StudentName"].Value}' is not a valid number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return; // Stop the entire process
+                    }
+                    // Check if the number is within the valid range.
+                    if (score < 0 || score > 100)
+                    {
+                        MessageBox.Show($"The score '{score}' for student '{row.Cells["StudentName"].Value}' must be between 0 and 100.", "Invalid Score", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return; // Stop the entire process
+                    }
+                }
+            }
+            // --- END: VALIDATION BLOCK ---
+
+            // If all validations pass, proceed with saving.
             try
             {
                 var marksToSave = new List<Mark>();
@@ -112,13 +145,25 @@ namespace UnicomTicManagementSystem.Views
                 {
                     if (row.Cells["Score"].Value != null && row.Cells["Score"].Value != DBNull.Value)
                     {
-                        if (int.TryParse(row.Cells["Score"].Value.ToString(), out int score) && score >= 0 && score <= 100)
+                        marksToSave.Add(new Mark
                         {
-                            marksToSave.Add(new Mark { StudentID = (int)row.Cells["StudentID"].Value, ExamID = (int)row.Cells["ExamID"].Value, Score = score });
-                        }
+                            StudentID = (int)row.Cells["StudentID"].Value,
+                            ExamID = (int)row.Cells["ExamID"].Value,
+                            Score = Convert.ToInt32(row.Cells["Score"].Value)
+                        });
                     }
                 }
-                foreach (var mark in marksToSave) { await _controller.UpsertMarkAsync(mark); }
+
+                if (marksToSave.Count == 0)
+                {
+                    MessageBox.Show("No scores were entered or changed to save.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                foreach (var mark in marksToSave)
+                {
+                    await _controller.UpsertMarkAsync(mark);
+                }
                 MessageBox.Show("Marks saved successfully!", "Success");
             }
             catch (Exception ex) { MessageBox.Show($"Error saving marks: {ex.Message}", "Error"); }

@@ -57,6 +57,12 @@ namespace UnicomTicManagementSystem.Views
         #region Course Button Clicks
         private async void btnAddCourse_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtCourseName.Text))
+            {
+                MessageBox.Show("Please enter a course name.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCourseName.Focus();
+                return;
+            }
             try
             {
                 await _courseController.AddCourseAsync(txtCourseName.Text.Trim());
@@ -101,6 +107,19 @@ namespace UnicomTicManagementSystem.Views
         // This method runs when the "Add Subject" button is clicked.
         private async void btnAddSubject_Click(object sender, EventArgs e)
         {
+            // Rule 1: A course must be selected first.
+            if (_selectedCourseId <= 0)
+            {
+                MessageBox.Show("Please select a course from the list before adding a subject.", "Course Not Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Rule 2: The subject name cannot be empty.
+            if (string.IsNullOrWhiteSpace(txtSubjectName.Text))
+            {
+                MessageBox.Show("Please enter a name for the new subject.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSubjectName.Focus();
+                return;
+            }
             try
             {
                 // Call the controller, passing the new subject name and the currently selected course ID.

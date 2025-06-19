@@ -53,6 +53,33 @@ namespace UnicomTicManagementSystem.Views
 
         private async void btnAdd_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtStudentName.Text))
+            {
+                MessageBox.Show("Please enter the student's full name.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtStudentName.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
+            {
+                MessageBox.Show("Please enter a username for the student.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtUsername.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Please enter a password for the new student.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPassword.Focus();
+                return;
+            }
+
+            // A ComboBox's SelectedValue is null if nothing is selected.
+            if (cmbCourses.SelectedValue == null)
+            {
+                MessageBox.Show("Please select a course for the student.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             try
             {
                 var newStudent = new Student
