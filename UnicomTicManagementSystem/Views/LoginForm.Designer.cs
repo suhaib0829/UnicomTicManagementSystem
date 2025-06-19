@@ -109,6 +109,7 @@ namespace UnicomTicManagementSystem.Views
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
             this.BackgroundImage = global::UnicomTicManagementSystem.Properties.Resources.borderpng_parspng_com_14;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(300, 273);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
@@ -122,6 +123,7 @@ namespace UnicomTicManagementSystem.Views
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -2,143 +2,121 @@
 
 using System;
 using System.Windows.Forms;
-using UnicomTicManagementSystem.Models;
-using UnicomTicManagementSystem.Views;
-using UnicomTicManagementSystem.Services;
-
-
+using UnicomTicManagementSystem.Services; // For UserSession
+using UnicomTicManagementSystem.Models; // For User and Student types
 
 namespace UnicomTicManagementSystem.Views
 {
-    /// <summary>
-    /// The main dashboard of the application.
-    /// The controls and buttons displayed on this form change based on the logged-in user's role.
-    /// </summary>
     public partial class MainForm : Form
     {
-        /// <summary>
-        /// The constructor for the MainForm.
-        /// It is now simpler because it doesn't need to receive any user information.
-        /// </summary>
+        // A flag to determine if the form is closing because of logout or the 'X' button.
+        private bool _isLoggingOut = false;
+
         public MainForm()
         {
-            // This method (from the Designer.cs file) creates and draws all the controls.
             InitializeComponent();
         }
 
-        /// <summary>
-        /// This method runs automatically just before the form is displayed.
-        /// It's the perfect place to set up the form's appearance based on the user role.
-        /// </summary>
         private void MainForm_Load(object sender, EventArgs e)
         {
             SetupDashboardForRole();
         }
 
-        /// <summary>
-        /// This method checks the UserSession for the logged-in user's role
-        /// and configures the dashboard by showing or hiding the appropriate buttons.
-        /// </summary>
         private void SetupDashboardForRole()
         {
-            // --- 1. Get User Information from the Global Session ---
-            // This is much cleaner than passing objects between forms.
             string role = UserSession.Role;
             string username = UserSession.Username;
-
-            // --- 2. Customize the Welcome Message ---
-            // Update the title label on our fancy title bar.
             lblTitle.Text = $"Welcome, {username} ({role})";
 
-            // --- 3. Set Button Visibility Based on Role ---
-            // First, hide all buttons that are role-dependent.
+            // Hide all buttons first
             btnManageCourses.Visible = false;
             btnManageStudents.Visible = false;
             btnManageExams.Visible = false;
             btnManageTimetable.Visible = false;
 
-            // Use a switch statement to make the correct buttons visible.
+            // Show buttons based on role
             switch (role)
             {
                 case "Admin":
-                    // The Admin sees all four main module buttons.
                     btnManageCourses.Visible = true;
                     btnManageStudents.Visible = true;
                     btnManageExams.Visible = true;
                     btnManageTimetable.Visible = true;
                     break;
-
                 case "Staff":
-                    // Staff can manage exams/marks and view the timetable.
                     btnManageExams.Visible = true;
                     btnManageTimetable.Visible = true;
                     break;
-
                 case "Lecturer":
-                    // Lecturers can manage marks and view the timetable.
                     btnManageExams.Visible = true;
                     btnManageTimetable.Visible = true;
-                    // Let's refine the button text for clarity.
                     btnManageExams.Text = "Enter/Edit Marks";
                     btnManageTimetable.Text = "View Timetable";
                     break;
-
                 case "Student":
-                    // Students can view their marks and the timetable.
                     btnManageExams.Visible = true;
                     btnManageTimetable.Visible = true;
-                    // Refine the button text for clarity.
                     btnManageExams.Text = "View My Marks";
                     btnManageTimetable.Text = "View My Timetable";
                     break;
             }
         }
 
-        /// <summary>
-        /// This event handler ensures that when the main dashboard is closed,
-        /// the entire application exits properly, including the hidden login form.
-        /// </summary>
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // Clear the session data on exit.
-            UserSession.EndSession();
-            Application.Exit();
-        }
-
-        // --- All the Button Click Handlers ---
-        // These methods define what happens when a user clicks a dashboard button.
+        // --- CORRECTED AND FINAL Button Click Handlers ---
 
         private void btnManageCourses_Click(object sender, EventArgs e)
         {
-            using (var courseForm = new CourseForm())
-            {
-                courseForm.ShowDialog(this); // 'this' makes it open centered over the MainForm
-            }
+            using (var courseForm = new CourseForm()) { courseForm.ShowDialog(this); }
         }
 
         private void btnManageStudents_Click(object sender, EventArgs e)
         {
-            using (var studentForm = new StudentForm())
-            {
-                studentForm.ShowDialog(this);
-            }
+            using (var studentForm = new StudentForm()) { studentForm.ShowDialog(this); }
         }
 
         private void btnManageExams_Click(object sender, EventArgs e)
         {
-            using (var examsAndMarksForm = new ExamsAndMarksForm())
-            {
-                examsAndMarksForm.ShowDialog(this);
-            }
+            // Use ExamsAndMarksForm for the combined UI
+            using (var examsAndMarksForm = new ExamsAndMarksForm()) { examsAndMarksForm.ShowDialog(this); }
         }
 
         private void btnManageTimetable_Click(object sender, EventArgs e)
         {
-            // The TimetableForm also gets its user info from the global UserSession.
-            using (var timetableForm = new TimetableForm())
+            using (var timetableForm = new TimetableForm()) { timetableForm.ShowDialog(this); }
+        }
+
+        // The new Logout button handler
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirmResult == DialogResult.Yes)
             {
-                timetableForm.ShowDialog(this);
+                UserSession.EndSession();
+
+                // Set the flag to true so the FormClosing event knows we are logging out.
+                _isLoggingOut = true;
+
+                // Create the new LoginForm.
+                LoginForm newLoginForm = new LoginForm(); // Using a different name 'newLoginForm' to avoid ambiguity.
+                newLoginForm.Show();
+
+                // Close the current dashboard.
+                this.Close();
             }
+        }
+
+        // The one and only FormClosing event handler
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // If the _isLoggingOut flag is true, just let the form close without exiting the app.
+            if (_isLoggingOut)
+            {
+                return;
+            }
+
+            // Otherwise, the user clicked the 'X' button, so exit the entire application.
+            Application.Exit();
         }
     }
 }

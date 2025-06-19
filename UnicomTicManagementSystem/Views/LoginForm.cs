@@ -80,5 +80,10 @@ namespace UnicomTicManagementSystem.Views
                 MessageBox.Show($"A critical system error occurred: {ex.Message}", "System Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

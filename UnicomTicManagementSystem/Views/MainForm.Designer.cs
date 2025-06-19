@@ -1,18 +1,10 @@
 ﻿// In Views/MainForm.Designer.cs
-
 namespace UnicomTicManagementSystem.Views
 {
     partial class MainForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -24,168 +16,103 @@ namespace UnicomTicManagementSystem.Views
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.btnLogout = new System.Windows.Forms.Button();
             this.panelButtons = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnManageCourses = new System.Windows.Forms.Button();
             this.btnManageStudents = new System.Windows.Forms.Button();
             this.btnManageExams = new System.Windows.Forms.Button();
-            this.btnManageCourses = new System.Windows.Forms.Button();
             this.btnManageTimetable = new System.Windows.Forms.Button();
             this.panelTitleBar.SuspendLayout();
             this.panelButtons.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
+
             // panelTitleBar
-            // 
             this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.panelTitleBar.Controls.Add(this.btnLogout);
             this.panelTitleBar.Controls.Add(this.lblTitle);
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(0, 0);
-            this.panelTitleBar.Margin = new System.Windows.Forms.Padding(2);
-            this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(1498, 52);
-            this.panelTitleBar.TabIndex = 0;
-            // 
+            this.panelTitleBar.Size = new System.Drawing.Size(1200, 80);
+
             // lblTitle
-            // 
             this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(0, 0);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
-            this.lblTitle.Size = new System.Drawing.Size(1498, 52);
-            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.lblTitle.Text = "UMS Dashboard";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
+
+            // btnLogout
+            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(83)))), ((int)(((byte)(79)))));
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnLogout.ForeColor = System.Drawing.Color.White;
+            this.btnLogout.Location = new System.Drawing.Point(1050, 20);
+            this.btnLogout.Size = new System.Drawing.Size(130, 40);
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+
             // panelButtons
-            // 
             this.panelButtons.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
-            this.panelButtons.BackgroundImage = global::UnicomTicManagementSystem.Properties.Resources.R;
-            this.panelButtons.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelButtons.Controls.Add(this.panel1);
+            this.panelButtons.Controls.Add(this.btnManageCourses);
+            this.panelButtons.Controls.Add(this.btnManageStudents);
+            this.panelButtons.Controls.Add(this.btnManageExams);
+            this.panelButtons.Controls.Add(this.btnManageTimetable);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelButtons.Location = new System.Drawing.Point(0, 52);
-            this.panelButtons.Margin = new System.Windows.Forms.Padding(2);
-            this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Padding = new System.Windows.Forms.Padding(33, 32, 33, 32);
-            this.panelButtons.Size = new System.Drawing.Size(1498, 946);
-            this.panelButtons.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.panel1.BackgroundImage = global::UnicomTicManagementSystem.Properties.Resources.borderpng_parspng_com_14;
-            this.panel1.Controls.Add(this.btnManageStudents);
-            this.panel1.Controls.Add(this.btnManageExams);
-            this.panel1.Controls.Add(this.btnManageCourses);
-            this.panel1.Controls.Add(this.btnManageTimetable);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(366, 959);
-            this.panel1.TabIndex = 4;
-            // 
-            // btnManageStudents
-            // 
-            this.btnManageStudents.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btnManageStudents.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnManageStudents.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManageStudents.ForeColor = System.Drawing.Color.White;
-            this.btnManageStudents.Location = new System.Drawing.Point(35, 34);
-            this.btnManageStudents.Margin = new System.Windows.Forms.Padding(2);
-            this.btnManageStudents.Name = "btnManageStudents";
-            this.btnManageStudents.Size = new System.Drawing.Size(283, 137);
-            this.btnManageStudents.TabIndex = 1;
-            this.btnManageStudents.Text = "Manage Students";
-            this.btnManageStudents.UseVisualStyleBackColor = false;
-            this.btnManageStudents.Click += new System.EventHandler(this.btnManageStudents_Click);
-            // 
-            // btnManageExams
-            // 
-            this.btnManageExams.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btnManageExams.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnManageExams.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManageExams.ForeColor = System.Drawing.Color.White;
-            this.btnManageExams.Location = new System.Drawing.Point(35, 438);
-            this.btnManageExams.Margin = new System.Windows.Forms.Padding(2);
-            this.btnManageExams.Name = "btnManageExams";
-            this.btnManageExams.Size = new System.Drawing.Size(283, 138);
-            this.btnManageExams.TabIndex = 2;
-            this.btnManageExams.Text = "Manage Exams\r\n&& Marks";
-            this.btnManageExams.UseVisualStyleBackColor = false;
-            this.btnManageExams.Click += new System.EventHandler(this.btnManageExams_Click);
-            // 
-            // btnManageCourses
-            // 
-            this.btnManageCourses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btnManageCourses.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnManageCourses.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManageCourses.ForeColor = System.Drawing.Color.White;
-            this.btnManageCourses.Location = new System.Drawing.Point(35, 641);
-            this.btnManageCourses.Margin = new System.Windows.Forms.Padding(2);
-            this.btnManageCourses.Name = "btnManageCourses";
-            this.btnManageCourses.Size = new System.Drawing.Size(283, 137);
-            this.btnManageCourses.TabIndex = 0;
-            this.btnManageCourses.Text = "Manage Courses\r\n&& Subjects";
-            this.btnManageCourses.UseVisualStyleBackColor = false;
-            this.btnManageCourses.Click += new System.EventHandler(this.btnManageCourses_Click);
-            // 
-            // btnManageTimetable
-            // 
-            this.btnManageTimetable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btnManageTimetable.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnManageTimetable.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManageTimetable.ForeColor = System.Drawing.Color.White;
-            this.btnManageTimetable.Location = new System.Drawing.Point(35, 239);
-            this.btnManageTimetable.Margin = new System.Windows.Forms.Padding(2);
-            this.btnManageTimetable.Name = "btnManageTimetable";
-            this.btnManageTimetable.Size = new System.Drawing.Size(283, 138);
-            this.btnManageTimetable.TabIndex = 3;
-            this.btnManageTimetable.Text = "Manage Timetable";
-            this.btnManageTimetable.UseVisualStyleBackColor = false;
-            this.btnManageTimetable.Click += new System.EventHandler(this.btnManageTimetable_Click);
-            // 
+            this.panelButtons.Location = new System.Drawing.Point(0, 80);
+            this.panelButtons.Padding = new System.Windows.Forms.Padding(50);
+            this.panelButtons.Size = new System.Drawing.Size(1200, 640);
+
+            // ... (Button configurations) ...
+            this.btnManageCourses.Location = new System.Drawing.Point(50, 50); this.btnManageCourses.Size = new System.Drawing.Size(280, 120);
+            this.btnManageCourses.Text = "Manage Courses\r\n&& Subjects"; this.btnManageCourses.Click += new System.EventHandler(this.btnManageCourses_Click);
+            this.btnManageStudents.Location = new System.Drawing.Point(350, 50); this.btnManageStudents.Size = new System.Drawing.Size(280, 120);
+            this.btnManageStudents.Text = "Manage Students"; this.btnManageStudents.Click += new System.EventHandler(this.btnManageStudents_Click);
+            this.btnManageExams.Location = new System.Drawing.Point(50, 190); this.btnManageExams.Size = new System.Drawing.Size(280, 120);
+            this.btnManageExams.Text = "Manage Exams\r\n&& Marks"; this.btnManageExams.Click += new System.EventHandler(this.btnManageExams_Click);
+            this.btnManageTimetable.Location = new System.Drawing.Point(350, 190); this.btnManageTimetable.Size = new System.Drawing.Size(280, 120);
+            this.btnManageTimetable.Text = "Manage Timetable"; this.btnManageTimetable.Click += new System.EventHandler(this.btnManageTimetable_Click);
+
+            foreach (System.Windows.Forms.Button btn in this.panelButtons.Controls)
+            {
+                btn.BackColor = System.Drawing.Color.White;
+                btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+                btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                btn.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+                btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            }
+
             // MainForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1498, 998);
+            this.ClientSize = new System.Drawing.Size(1200, 720);
             this.Controls.Add(this.panelButtons);
             this.Controls.Add(this.panelTitleBar);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Unicom TIC Management System";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panelTitleBar.ResumeLayout(false);
             this.panelButtons.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         #endregion
 
-        // --- 7. Declare Control Variables ---
         private System.Windows.Forms.Panel panelTitleBar;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Panel panelButtons;
         private System.Windows.Forms.Button btnManageCourses;
         private System.Windows.Forms.Button btnManageStudents;
         private System.Windows.Forms.Button btnManageExams;
         private System.Windows.Forms.Button btnManageTimetable;
-        private System.Windows.Forms.Panel panel1;
     }
 }
