@@ -10,7 +10,7 @@ namespace UnicomTicManagementSystem.Views
     // This correctly inherits from Form.
     public partial class LoginForm : Form
     {
-        // The constructor for the form.
+        // The constructor for the form
         public LoginForm()
         {
             // This method (defined in LoginForm.Designer.cs) creates and draws all the controls.
