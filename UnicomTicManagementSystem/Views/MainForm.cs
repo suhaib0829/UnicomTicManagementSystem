@@ -126,10 +126,9 @@ namespace UnicomTicManagementSystem.Views
 
         private void btnManageExams_Click(object sender, EventArgs e)
         {
-            // The MarksForm now gets its user info from the global UserSession.
-            using (var marksForm = new MarksForm())
+            using (var examsAndMarksForm = new ExamsAndMarksForm())
             {
-                marksForm.ShowDialog(this);
+                examsAndMarksForm.ShowDialog(this);
             }
         }
 

@@ -162,11 +162,11 @@
     <Compile Include="Views\CourseForm.Designer.cs">
       <DependentUpon>CourseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ExamForm.cs">
+    <Compile Include="Views\ExamsAndMarksForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ExamForm.Designer.cs">
-      <DependentUpon>ExamForm.cs</DependentUpon>
+    <Compile Include="Views\ExamsAndMarksForm.Designer.cs">
+      <DependentUpon>ExamsAndMarksForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginForm.cs">
       <SubType>Form</SubType>
@@ -190,12 +190,6 @@
     </Compile>
     <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MarkForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\MarkForm.Designer.cs">
-      <DependentUpon>MarkForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\StudentForm.cs">
       <SubType>Form</SubType>
@@ -222,8 +216,8 @@
     <EmbeddedResource Include="Views\CourseForm.resx">
       <DependentUpon>CourseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ExamForm.resx">
-      <DependentUpon>ExamForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ExamsAndMarksForm.resx">
+      <DependentUpon>ExamsAndMarksForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
