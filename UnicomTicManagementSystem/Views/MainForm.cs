@@ -118,5 +118,10 @@ namespace UnicomTicManagementSystem.Views
             // Otherwise, the user clicked the 'X' button, so exit the entire application.
             Application.Exit();
         }
+
+        private void panelButtons_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
