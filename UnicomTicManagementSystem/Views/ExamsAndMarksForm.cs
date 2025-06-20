@@ -23,7 +23,6 @@ namespace UnicomTicManagementSystem.Views
 
         private async void ExamsAndMarksForm_Load(object sender, EventArgs e)
         {
-            // Load everything needed for both tabs
             SetupFormForRole();
             await LoadExamsGridAsync();
             await LoadSubjectsIntoExamComboBoxAsync();
@@ -32,7 +31,6 @@ namespace UnicomTicManagementSystem.Views
         }
 
         #region Manage Exams Tab Logic
-
         private void dgvExams_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvExams.SelectedRows.Count > 0)
@@ -55,7 +53,6 @@ namespace UnicomTicManagementSystem.Views
                 txtExamName.Focus();
                 return;
             }
-
             if (cmbSubjects.SelectedValue == null)
             {
                 MessageBox.Show("Please select a subject for this exam.", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -72,6 +69,7 @@ namespace UnicomTicManagementSystem.Views
 
         private async void btnUpdateExam_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtExamId.Text)) { MessageBox.Show("Please select an exam to update.", "Selection Required"); return; }
             try
             {
                 await _controller.UpdateExamAsync(new Exam { ExamID = Convert.ToInt32(txtExamId.Text), ExamName = txtExamName.Text.Trim(), SubjectID = (int)cmbSubjects.SelectedValue });
@@ -83,6 +81,7 @@ namespace UnicomTicManagementSystem.Views
 
         private async void btnDeleteExam_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtExamId.Text)) { MessageBox.Show("Please select an exam to delete.", "Selection Required"); return; }
             var confirm = MessageBox.Show("Delete this exam and all associated marks?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirm == DialogResult.Yes)
             {
@@ -97,11 +96,9 @@ namespace UnicomTicManagementSystem.Views
         }
 
         private void btnClearExam_Click(object sender, EventArgs e) => ClearExamForm();
-
         #endregion
 
         #region Enter Marks Tab Logic
-
         private async void cmbExamsForMarks_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbExamsForMarks.SelectedValue is int examId && examId > 0)
@@ -121,23 +118,14 @@ namespace UnicomTicManagementSystem.Views
                 var scoreCell = row.Cells["Score"];
                 if (scoreCell.Value != null && scoreCell.Value != DBNull.Value && !string.IsNullOrEmpty(scoreCell.Value.ToString()))
                 {
-                    // Check if the value is a valid integer.
-                    if (!int.TryParse(scoreCell.Value.ToString(), out int score))
+                    if (!int.TryParse(scoreCell.Value.ToString(), out int score) || score < 0 || score > 100)
                     {
-                        MessageBox.Show($"The score '{scoreCell.Value}' for student '{row.Cells["StudentName"].Value}' is not a valid number.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return; // Stop the entire process
-                    }
-                    // Check if the number is within the valid range.
-                    if (score < 0 || score > 100)
-                    {
-                        MessageBox.Show($"The score '{score}' for student '{row.Cells["StudentName"].Value}' must be between 0 and 100.", "Invalid Score", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return; // Stop the entire process
+                        MessageBox.Show($"The score for {row.Cells["StudentName"].Value} must be a whole number between 0 and 100.", "Invalid Score", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
                 }
             }
-            // --- END: VALIDATION BLOCK ---
 
-            // If all validations pass, proceed with saving.
             try
             {
                 var marksToSave = new List<Mark>();
@@ -145,34 +133,18 @@ namespace UnicomTicManagementSystem.Views
                 {
                     if (row.Cells["Score"].Value != null && row.Cells["Score"].Value != DBNull.Value)
                     {
-                        marksToSave.Add(new Mark
-                        {
-                            StudentID = (int)row.Cells["StudentID"].Value,
-                            ExamID = (int)row.Cells["ExamID"].Value,
-                            Score = Convert.ToInt32(row.Cells["Score"].Value)
-                        });
+                        marksToSave.Add(new Mark { StudentID = (int)row.Cells["StudentID"].Value, ExamID = (int)row.Cells["ExamID"].Value, Score = Convert.ToInt32(row.Cells["Score"].Value) });
                     }
                 }
-
-                if (marksToSave.Count == 0)
-                {
-                    MessageBox.Show("No scores were entered or changed to save.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                foreach (var mark in marksToSave)
-                {
-                    await _controller.UpsertMarkAsync(mark);
-                }
+                if (marksToSave.Count == 0) { MessageBox.Show("No scores were entered or changed to save.", "Information"); return; }
+                foreach (var mark in marksToSave) { await _controller.UpsertMarkAsync(mark); }
                 MessageBox.Show("Marks saved successfully!", "Success");
             }
             catch (Exception ex) { MessageBox.Show($"Error saving marks: {ex.Message}", "Error"); }
         }
-
         #endregion
 
         #region Helper Methods
-
         private async Task RefreshAllExamData()
         {
             await LoadExamsGridAsync();
@@ -185,14 +157,16 @@ namespace UnicomTicManagementSystem.Views
             bool canManageExams = UserSession.Role == "Admin" || UserSession.Role == "Staff";
             bool canManageMarks = UserSession.Role != "Student";
 
-            // Hide or show the "Manage Exams" editing controls
             groupBoxExams.Visible = canManageExams;
-
-            // Hide or show the "Save Changes" button on the marks tab
             btnSaveChanges.Visible = canManageMarks;
-
-            // Make marks grid read-only for students
             dgvMarks.ReadOnly = !canManageMarks;
+
+            if (!canManageExams && !canManageMarks)
+            {
+                // If a user has no edit rights at all (e.g., a future role), hide the entire tab control.
+                // For now, we just disable tabs they can't use.
+                if (!canManageExams) tabControlMain.TabPages.Remove(tabPageExams);
+            }
         }
 
         private void ClearExamForm()
@@ -205,32 +179,43 @@ namespace UnicomTicManagementSystem.Views
 
         private async Task LoadExamsGridAsync()
         {
-            dgvExams.DataSource = await _controller.GetAllExamsAsync();
-            if (dgvExams.Columns.Count > 0)
+            try
             {
-                dgvExams.Columns["ExamID"].Visible = false;
-                dgvExams.Columns["SubjectID"].Visible = false;
+                dgvExams.DataSource = await _controller.GetAllExamsAsync();
+                if (dgvExams.Columns.Count > 0)
+                {
+                    dgvExams.Columns["ExamID"].Visible = false;
+                    dgvExams.Columns["SubjectID"].Visible = false;
+                }
             }
+            catch (Exception ex) { MessageBox.Show($"Failed to load exams: {ex.Message}", "Data Error"); }
         }
 
         private async Task LoadSubjectsIntoExamComboBoxAsync()
         {
-            cmbSubjects.DataSource = await _controller.GetAllSubjectsAsync();
-            cmbSubjects.DisplayMember = "SubjectName";
-            cmbSubjects.ValueMember = "SubjectID";
+            try
+            {
+                cmbSubjects.DataSource = await _controller.GetAllSubjectsAsync();
+                cmbSubjects.DisplayMember = "SubjectName";
+                cmbSubjects.ValueMember = "SubjectID";
+            }
+            catch (Exception ex) { MessageBox.Show($"Failed to load subjects: {ex.Message}", "Data Error"); }
         }
 
         private async Task LoadExamsIntoMarksComboBoxAsync()
         {
-            cmbExamsForMarks.DataSource = await _controller.GetAllExamsAsync();
-            cmbExamsForMarks.DisplayMember = "ExamName";
-            cmbExamsForMarks.ValueMember = "ExamID";
-            cmbExamsForMarks.SelectedIndex = -1;
+            try
+            {
+                cmbExamsForMarks.DataSource = await _controller.GetAllExamsAsync();
+                cmbExamsForMarks.DisplayMember = "ExamName";
+                cmbExamsForMarks.ValueMember = "ExamID";
+                cmbExamsForMarks.SelectedIndex = -1;
+            }
+            catch (Exception ex) { MessageBox.Show($"Failed to load exams for marks tab: {ex.Message}", "Data Error"); }
         }
 
         private async Task LoadMarksGridAsync(int examId)
         {
-            // ... (Full LoadMarksGridAsync logic from MarksForm goes here) ...
             try
             {
                 _isProgrammaticallyChanging = true;
@@ -239,15 +224,26 @@ namespace UnicomTicManagementSystem.Views
                 dgvMarks.DataSource = marks;
                 if (dgvMarks.Columns.Count > 0)
                 {
+                    // Hide internal IDs
                     dgvMarks.Columns["MarkID"].Visible = false;
                     dgvMarks.Columns["StudentID"].Visible = false;
                     dgvMarks.Columns["ExamID"].Visible = false;
+
+                    // Set ReadOnly status for columns
+                    dgvMarks.Columns["StudentName"].ReadOnly = true;
+                    dgvMarks.Columns["ExamName"].ReadOnly = true;
+                    dgvMarks.Columns["SubjectName"].ReadOnly = true;
                     dgvMarks.Columns["Score"].ReadOnly = (UserSession.Role == "Student");
+
+                    // Set user-friendly header text
+                    dgvMarks.Columns["StudentName"].HeaderText = "Student Name";
+                    dgvMarks.Columns["ExamName"].HeaderText = "Exam";
+                    dgvMarks.Columns["SubjectName"].HeaderText = "Subject";
                 }
             }
+            catch (Exception ex) { MessageBox.Show($"Failed to load marks: {ex.Message}", "Data Error"); }
             finally { _isProgrammaticallyChanging = false; }
         }
-
         #endregion
     }
 }
