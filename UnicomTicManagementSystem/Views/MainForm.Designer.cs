@@ -80,14 +80,14 @@ namespace UnicomTicManagementSystem.Views
             this.btnManageTimetable.Location = new System.Drawing.Point(350, 190); this.btnManageTimetable.Size = new System.Drawing.Size(280, 120);
             this.btnManageTimetable.Text = "Manage Timetable"; this.btnManageTimetable.Click += new System.EventHandler(this.btnManageTimetable_Click);
 
-            foreach (System.Windows.Forms.Button btn in this.panelButtons.Controls)
-            {
-                btn.BackColor = System.Drawing.Color.White;
-                btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-                btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                btn.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-                btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            }
+            //foreach (System.Windows.Forms.Button btn in this.panelButtons.Controls)
+            //{
+            //    btn.BackColor = System.Drawing.Color.White;
+            //    btn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            //    btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //    btn.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            //    btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            //}
 
             // MainForm
             this.ClientSize = new System.Drawing.Size(1200, 720);
