@@ -245,5 +245,10 @@ namespace UnicomTicManagementSystem.Views
             finally { _isProgrammaticallyChanging = false; }
         }
         #endregion
+
+        private void txtExamName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
