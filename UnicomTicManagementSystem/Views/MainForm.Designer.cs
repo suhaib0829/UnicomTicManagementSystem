@@ -24,11 +24,11 @@ namespace UnicomTicManagementSystem.Views
             this.btnLogout = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelButtons = new System.Windows.Forms.Panel();
-            this.btnManageCourses = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.btnManageStudents = new System.Windows.Forms.Button();
             this.btnManageExams = new System.Windows.Forms.Button();
+            this.btnManageCourses = new System.Windows.Forms.Button();
             this.btnManageTimetable = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panelTitleBar.SuspendLayout();
             this.panelButtons.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -41,7 +41,7 @@ namespace UnicomTicManagementSystem.Views
             this.panelTitleBar.Controls.Add(this.lblTitle);
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(0, 0);
-            this.panelTitleBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelTitleBar.Margin = new System.Windows.Forms.Padding(2);
             this.panelTitleBar.Name = "panelTitleBar";
             this.panelTitleBar.Size = new System.Drawing.Size(963, 52);
             this.panelTitleBar.TabIndex = 0;
@@ -55,7 +55,7 @@ namespace UnicomTicManagementSystem.Views
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.Color.White;
             this.btnLogout.Location = new System.Drawing.Point(863, 13);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(87, 26);
             this.btnLogout.TabIndex = 1;
@@ -84,27 +84,25 @@ namespace UnicomTicManagementSystem.Views
             this.panelButtons.Controls.Add(this.panel2);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelButtons.Location = new System.Drawing.Point(0, 52);
-            this.panelButtons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelButtons.Margin = new System.Windows.Forms.Padding(2);
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Padding = new System.Windows.Forms.Padding(33, 32, 33, 32);
             this.panelButtons.Size = new System.Drawing.Size(963, 864);
             this.panelButtons.TabIndex = 1;
             this.panelButtons.Paint += new System.Windows.Forms.PaintEventHandler(this.panelButtons_Paint);
             // 
-            // btnManageCourses
+            // panel2
             // 
-            this.btnManageCourses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(204)))));
-            this.btnManageCourses.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnManageCourses.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.btnManageCourses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.btnManageCourses.Location = new System.Drawing.Point(35, 728);
-            this.btnManageCourses.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnManageCourses.Name = "btnManageCourses";
-            this.btnManageCourses.Size = new System.Drawing.Size(187, 111);
-            this.btnManageCourses.TabIndex = 0;
-            this.btnManageCourses.Text = "Manage Courses\r\n&& Subjects";
-            this.btnManageCourses.UseVisualStyleBackColor = false;
-            this.btnManageCourses.Click += new System.EventHandler(this.btnManageCourses_Click);
+            this.panel2.BackColor = System.Drawing.Color.Gray;
+            this.panel2.BackgroundImage = global::UnicomTicManagementSystem.Properties.Resources.borderpng_parspng_com_14;
+            this.panel2.Controls.Add(this.btnManageStudents);
+            this.panel2.Controls.Add(this.btnManageExams);
+            this.panel2.Controls.Add(this.btnManageTimetable);
+            this.panel2.Controls.Add(this.btnManageCourses);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(273, 1109);
+            this.panel2.TabIndex = 5;
             // 
             // btnManageStudents
             // 
@@ -112,8 +110,8 @@ namespace UnicomTicManagementSystem.Views
             this.btnManageStudents.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnManageStudents.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnManageStudents.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.btnManageStudents.Location = new System.Drawing.Point(35, 34);
-            this.btnManageStudents.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnManageStudents.Location = new System.Drawing.Point(35, 720);
+            this.btnManageStudents.Margin = new System.Windows.Forms.Padding(2);
             this.btnManageStudents.Name = "btnManageStudents";
             this.btnManageStudents.Size = new System.Drawing.Size(187, 110);
             this.btnManageStudents.TabIndex = 1;
@@ -128,13 +126,28 @@ namespace UnicomTicManagementSystem.Views
             this.btnManageExams.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnManageExams.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.btnManageExams.Location = new System.Drawing.Point(35, 501);
-            this.btnManageExams.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnManageExams.Margin = new System.Windows.Forms.Padding(2);
             this.btnManageExams.Name = "btnManageExams";
             this.btnManageExams.Size = new System.Drawing.Size(187, 111);
             this.btnManageExams.TabIndex = 2;
             this.btnManageExams.Text = "Manage Exams\r\n&& Marks";
             this.btnManageExams.UseVisualStyleBackColor = false;
             this.btnManageExams.Click += new System.EventHandler(this.btnManageExams_Click);
+            // 
+            // btnManageCourses
+            // 
+            this.btnManageCourses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(112)))), ((int)(((byte)(204)))));
+            this.btnManageCourses.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnManageCourses.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.btnManageCourses.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnManageCourses.Location = new System.Drawing.Point(35, 34);
+            this.btnManageCourses.Margin = new System.Windows.Forms.Padding(2);
+            this.btnManageCourses.Name = "btnManageCourses";
+            this.btnManageCourses.Size = new System.Drawing.Size(187, 111);
+            this.btnManageCourses.TabIndex = 0;
+            this.btnManageCourses.Text = "Manage Courses\r\n&& Subjects";
+            this.btnManageCourses.UseVisualStyleBackColor = false;
+            this.btnManageCourses.Click += new System.EventHandler(this.btnManageCourses_Click);
             // 
             // btnManageTimetable
             // 
@@ -143,26 +156,13 @@ namespace UnicomTicManagementSystem.Views
             this.btnManageTimetable.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.btnManageTimetable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.btnManageTimetable.Location = new System.Drawing.Point(35, 263);
-            this.btnManageTimetable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnManageTimetable.Margin = new System.Windows.Forms.Padding(2);
             this.btnManageTimetable.Name = "btnManageTimetable";
             this.btnManageTimetable.Size = new System.Drawing.Size(187, 111);
             this.btnManageTimetable.TabIndex = 3;
             this.btnManageTimetable.Text = "Manage Timetable";
             this.btnManageTimetable.UseVisualStyleBackColor = false;
             this.btnManageTimetable.Click += new System.EventHandler(this.btnManageTimetable_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Gray;
-            this.panel2.BackgroundImage = global::UnicomTicManagementSystem.Properties.Resources.borderpng_parspng_com_14;
-            this.panel2.Controls.Add(this.btnManageStudents);
-            this.panel2.Controls.Add(this.btnManageExams);
-            this.panel2.Controls.Add(this.btnManageCourses);
-            this.panel2.Controls.Add(this.btnManageTimetable);
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(273, 1109);
-            this.panel2.TabIndex = 5;
             // 
             // MainForm
             // 
@@ -171,7 +171,7 @@ namespace UnicomTicManagementSystem.Views
             this.ClientSize = new System.Drawing.Size(963, 916);
             this.Controls.Add(this.panelButtons);
             this.Controls.Add(this.panelTitleBar);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Unicom TIC Management System";
